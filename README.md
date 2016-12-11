@@ -9,8 +9,9 @@ endpoints but also how to build effect Unit Tests using Mocha & Chai.
 
 1. Clone repository
 2. npm run clean
-3. npm run dev
-4. Make Endpoint calls using browser or Postman
+3. npm run test
+4. npm run dev
+5. Make Endpoint calls using browser or Postman
 
 ## Current endpoints
 
@@ -45,7 +46,7 @@ endpoints but also how to build effect Unit Tests using Mocha & Chai.
     open - false > Road is closed
 
     HTTP Verb: **PUT**
-    
+
     URL: localhost:3000/roads/{roadID}?open={boolean}&notes={string}
 
 ### PropertyListings
