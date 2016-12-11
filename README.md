@@ -18,24 +18,28 @@ endpoints but also how to build effect Unit Tests using Mocha & Chai.
 
 1. Get Road
 
-    http verb: **GET**
-
+    HTTP Verb: **GET**
     URL: localhost:3000/roads/{roadID}
-    
-2. Get Roads within Bounding Box
-    http verb: **POST**
 
+2. Get Roads within Bounding Box
+
+    HTTP Verb: **POST**
     URL: localhost:3000/roads/{bbox}
 
 3. Get Roads within Bounding Box based on OPEN status
+
     open - true > Road is open
     open - false > Road is closed
-    http verb: **POST**
+
+    HTTP Verb: **POST**
     URL: localhost:3000/roads/{bbox}/{open}
+
 4. Update a roads OPEN status
+
     open - true > Road is open
     open - false > Road is closed
-    http verb: **PUT**
+
+    HTTP Verb: **PUT**
     URL: localhost:3000/roads/{roadID}?open={boolean}&notes={string}
 
 ### PropertyListings
