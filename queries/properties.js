@@ -1,12 +1,13 @@
-var axios = require('axios');
+const axios = require('axios');
+const credentials = require('../bin/credentials');
 
 module.exports = {
 
   getLatest: function(req, res) {
+    let url = `${credentials.zoopla.url}/property_listings.json?postcode=${req.query.postcode}&page_size=${req.query.page_size}&property_type=${req.query.property_type}&api_key=${credentials.zoopla.api_key}`;
     axios
-      .get ('http://api.zoopla.co.uk/api/v1/property_listings.json?postcode=L1&page_size=8&api_key=tgkmwyu33s5va3qvk39w47b6&property_type=houses')
+      .get (url)
       .then((response) => {
-        // console.log(response.data);
         res.status(200)
         .json({
           status: 'Success',
