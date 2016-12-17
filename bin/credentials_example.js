@@ -9,6 +9,11 @@ module.exports = {
   zoopla: {
     zoopla_url: 'api url',
     api_key: 'api key',
-    search_size: 10
+    defaults: {
+      radius: 0,
+      radius_max: 0,
+      search_size: 0,
+      search_limit: 0
+    }
   },
 }
