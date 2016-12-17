@@ -1,4 +1,5 @@
-let credentials = require('../bin/credentials');
+const credentials = require('../bin/credentials');
+const response_messages = require('../lib/response_messages');
 let promise = require('bluebird');
 let util = require('util');
 
@@ -17,16 +18,6 @@ let connectionString = util.format('postgres://%s:%s@%s:%s/%s',
 );
 let db = pgp(connectionString);
 
-const RESPONSES_STATUS = {
-  SUCCESS: 'Success',
-  ERROR: 'Error'
-};
-
-const RESPONSES_MESSAGES = {
-  RESOURCE_FOUND: 'Resource found',
-  RESOURCE_NOT_FOUND: 'Resource not found',
-  PARAMETER_ERROR: 'Format of parameters is incorrect',
-};
 
 module.exports = {
 
@@ -39,16 +30,16 @@ module.exports = {
       .then(function(data) {
         res.status(200)
         .json({
-          status: RESPONSES_STATUS.SUCCESS,
-          message: RESPONSES_MESSAGES.RESOURCE_FOUND,
+          status: response_messages.RESPONSES_STATUS.SUCCESS,
+          message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
           data: data
         });
       })
       .catch(function(err) {
         res.status(404)
         .json({
-          status: RESPONSES_STATUS.ERROR,
-          message: RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
+          status: response_messages.RESPONSES_STATUS.ERROR,
+          message: response_messages.RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
         })
       })
       .finally(function() {
@@ -78,8 +69,8 @@ module.exports = {
         .then(function(data) {
           res.status(200)
           .json({
-            status: RESPONSES_STATUS.SUCCESS,
-            message: RESPONSES_MESSAGES.RESOURCE_FOUND,
+            status: response_messages.RESPONSES_STATUS.SUCCESS,
+            message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
             data: data
           });
         })
@@ -87,8 +78,8 @@ module.exports = {
           console.log('Error: ', err);
           res.status(404)
           .json({
-            status: RESPONSES_STATUS.ERROR,
-            message: RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
+            status: response_messages.RESPONSES_STATUS.ERROR,
+            message: response_messages.RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
           });
         })
         .finally(function() {
@@ -98,8 +89,8 @@ module.exports = {
     else {
       res.status(404)
       .json({
-        status: RESPONSES_STATUS.ERROR,
-        message: RESPONSES_MESSAGES.PARAMETER_ERROR
+        status: response_messages.RESPONSES_STATUS.ERROR,
+        message: response_messages.RESPONSES_MESSAGES.PARAMETER_ERROR
       });
     }
   },
@@ -127,8 +118,8 @@ module.exports = {
         .then(function(data) {
           res.status(200)
           .json({
-            status: RESPONSES_STATUS.SUCCESS,
-            message: RESPONSES_MESSAGES.RESOURCE_FOUND,
+            status: response_messages.RESPONSES_STATUS.SUCCESS,
+            message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
             data: data
           });
         })
@@ -136,8 +127,8 @@ module.exports = {
           console.log('Error: ', err);
           res.status(404)
           .json({
-            status: RESPONSES_STATUS.ERROR,
-            message: RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
+            status: response_messages.RESPONSES_STATUS.ERROR,
+            message: response_messages.RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
           });
         })
         .finally(function() {
@@ -146,8 +137,8 @@ module.exports = {
     } else {
       res.status(400)
       .json({
-        status: RESPONSES_STATUS.ERROR,
-        message: RESPONSES_MESSAGES.PARAMETER_ERROR
+        status: response_messages.RESPONSES_STATUS.ERROR,
+        message: response_messages.RESPONSES_MESSAGES.PARAMETER_ERROR
       });
     }
   },
@@ -163,15 +154,15 @@ module.exports = {
       .then(function(data) {
         res.status(200)
           .json({
-            status: RESPONSES_STATUS.SUCCESS,
-            message: RESPONSES_MESSAGES.RESOURCE_FOUND
+            status: response_messages.RESPONSES_STATUS.SUCCESS,
+            message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND
           });
       })
       .catch(function(err) {
         res.status(400)
         .json({
-          status: RESPONSES_STATUS.ERROR,
-          message: RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
+          status: response_messages.RESPONSES_STATUS.ERROR,
+          message: response_messages.RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
         });
       });
   }

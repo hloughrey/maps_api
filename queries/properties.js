@@ -1,5 +1,6 @@
 const axios = require('axios');
 const credentials = require('../bin/credentials');
+const response_messages = require('../lib/response_messages');
 
 exports.getPropertyListing = function(req, res) {
   let url = `${credentials.zoopla.url}/property_listings.json?
@@ -26,9 +27,8 @@ exports.getPropertyListing = function(req, res) {
       res.status(200)
       .json({
         url: url,
-        status: 'Success',
-        statusCode: 200,
-        message: 'Smashing',
+        status: response_messages.RESPONSES_STATUS.SUCCESS,
+        message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
         data: response.data
       });
     })
@@ -36,9 +36,8 @@ exports.getPropertyListing = function(req, res) {
       res.status(err.response.status)
       .json({
         url: url,
-        status: 'Error',
-        statusCode: err.response.status,
-        message: 'AHHH THERE WAS AN ERROR'
+        status: response_messages.RESPONSES_STATUS.ERROR,
+        message: response_messages.RESPONSES_MESSAGES.RESOURCE_NOT_FOUND
       });
     });
 };
