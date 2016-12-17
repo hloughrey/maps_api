@@ -1,6 +1,6 @@
 const propertyListings = require('express').Router();
 const propertyQueries = require('../../queries/properties')
 
-propertyListings.get('/', propertyQueries.getLatest);
+propertyListings.get('/', propertyQueries.getPropertyListing);
 
 module.exports = propertyListings;
