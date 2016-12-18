@@ -1,5 +1,6 @@
 const axios = require('axios');
 const credentials = require('../../bin/credentials');
+const validation = require('../../lib/validation/propertiesValidation');
 const response_messages = require('../../lib/response_messages');
 
 exports.getPropertyListing = function(req, res) {
@@ -15,16 +16,16 @@ exports.getPropertyListing = function(req, res) {
   minimum_beds=${req.query.minimum_beds ? validation.isNumber(req.query.minimum_beds) : ''}&
   maximum_beds=${req.query.maximum_beds ? validation.isNumber(req.query.maximum_beds) : ''}&
   furnished=${req.query.furnished ? validation.booleanValidation(req.query.furnished, credentials.zoopla.defaults.furnished) : ''}&
-  property_type=${req.query.property_type ? req.query.property_type : ''}&
+  property_type=${req.query.property_type ? validation.booleanValidation(req.query.property_type, credentials.zoopla.defaults.property_type) : ''}&
   new_homes=${req.query.new_homes ? validation.booleanValidation(req.query.new_homes, credentials.zoopla.defaults.new_homes) : ''}&
   chain_free=${req.query.chain_free ? validation.booleanValidation(req.query.chain_free, credentials.zoopla.defaults.chain_free) : ''}&
   postcode=${req.query.postcode ? req.query.postcode : ''}&
   page_size=${req.query.page_size ? validation.getSearchSize(req.query.page_size) : credentials.zoopla.defaults.search_size}&
   api_key=${credentials.zoopla.api_key}`.replace(/(\n  )/g, '');
   axios
-    .get (url)
+    .get(url)
     .then((response) => {
-      res.status(200)
+      res.status(response.status)
       .json({
         status: response_messages.RESPONSES_STATUS.SUCCESS,
         message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
@@ -39,28 +40,3 @@ exports.getPropertyListing = function(req, res) {
       });
     });
 };
-
-const validation = {
-  booleanValidation: function(request, values){
-    let test = values.filter(value => value === request);
-    if (test.length === 1){
-      return test[0];
-    } else {
-      return '';
-    };
-  },
-  isNumber: function(request) {
-    if(isNaN(request)) {
-      return ''
-    } else {
-      return request
-    };
-  },
-  getSearchSize: function(searchSize){
-    if(searchSize && searchSize < credentials.zoopla.defaults.search_limit) {
-      return searchSize;
-    } else {
-      return credentials.zoopla.defaults.search_limit
-    }
-  }
-}
