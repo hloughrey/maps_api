@@ -1,5 +1,5 @@
 const roads = require('express').Router();
-const roadQueries = require('../../queries/roads');
+const roadQueries = require('../../queries/roads/roads');
 
 
 roads.get('/:id', roadQueries.getRoad);

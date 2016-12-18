@@ -1,10 +1,10 @@
 process.env.NODE_ENV = 'test';
 
-let Routes = require('../routes/roads/');
+let Routes = require('../../../routes/roads/');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../app');
+let server = require('../../../app');
 let should = chai.should();
 
 chai.use(chaiHttp);

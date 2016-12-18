@@ -1,5 +1,5 @@
-const credentials = require('../bin/credentials');
-const response_messages = require('../lib/response_messages');
+const credentials = require('../../bin/credentials');
+const response_messages = require('../../lib/response_messages');
 let promise = require('bluebird');
 let util = require('util');
 

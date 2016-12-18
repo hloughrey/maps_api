@@ -21,10 +21,7 @@ exports.getAveragePrice = function(req, res) {
       .json({
         status: response_messages.RESPONSES_STATUS.SUCCESS,
         message: response_messages.RESPONSES_MESSAGES.RESOURCE_FOUND,
-        data: {
-          propertyCount: response.data.result_count,
-          averagePrice: calculateAverage(response.data, req.query.listing_status)
-        }
+        data: calculateAverage(response.data, req.query.listing_status)
       });
     })
     .catch((err) => {
